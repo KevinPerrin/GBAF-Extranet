@@ -1,0 +1,134 @@
+body {
+    background-color: #b3aaaa;
+    margin: 0;
+    text-align:center;
+}
+header {
+    border-bottom: 7px solid red;
+    display:flex;
+    justify-content: space-between;
+    background-color: white;
+    font-family: Verdana, serif;
+}
+header p {
+    display: flex;
+    flex-direction: column;
+}  
+/*========= Login ===========*/
+.full-height {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}    
+.Connexion-inscription {
+    min-width: 250px;
+    max-width: 450px;
+    margin-left: auto;
+    margin-right: auto;
+    background-color: white;
+    border-radius: 5em;
+    padding: 3em;
+    text-align: center;
+    font-family: Verdana, serif;
+}
+.lien-inscription {
+    text-align: center;
+    color:black;
+    padding:6px;
+    transition: 0.3s;
+    border-radius:3px;
+}
+.lien-inscription:hover {
+    background-color:red;
+    color:white;
+}
+/*========= Page Accueil ===========*/
+.container {
+    max-width: 1080px;
+    margin: auto;
+}
+.photo1 {
+    display: flex;
+    flex-direction: row;
+    text-align:center;
+    margin-left: auto;
+    margin-right: auto;
+    padding:50px;
+    width: 100%;
+    justify-content: space-around;
+}
+.titre {
+    text-align:left;
+}
+.acteur {
+    width: 100%;
+    margin: 10px 0;
+    padding: 20px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    background-color: white;
+    border: solid 5px red;
+    border-radius: 10px;
+}
+.presentation_acteur {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+.logo_acteur {
+    width: 400px;
+    border: solid 1px #000000;
+}
+.texte_acteur {
+    margin-left: 25px;
+    width: 60%;
+    font-family: Verdana, serif;
+}
+.bouton {
+    background: red;
+    align-self: flex-end;
+    white-space: nowrap;
+    border-radius: 10px;
+    padding: 8px;
+    text-decoration: none;
+    color:black;
+    font-size: 1,3em;
+}
+.bouton:hover {
+    background-color:black;
+    color:white;
+}
+/*========= Page Acteur ===========*/
+.photo_acteur {
+    display: flex;
+    flex-direction: column;
+    min-width: 50em;
+    max-width: 20em;
+    text-align:center;
+    margin-left: auto;
+    margin-right: auto;
+    padding:50px;
+}
+.container_acteur {
+    text-align:left;
+}
+/*========= Commentaires ===========*/
+
+footer {
+    display: flex;
+    grid-area: footer;
+    justify-content: center;
+    border-top: 7px solid red;
+    width: 100%; height: 50px;
+    background-color: white;
+    bottom: 0; left: 0; right: 0;
+}
+footer p {
+    font-weight: 100;
+    font-size: 15px;
+    color: black;
+    text-align: center;
+    line-height: 2em;
+}

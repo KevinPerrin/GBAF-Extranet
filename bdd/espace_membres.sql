@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Aug 23, 2021 at 08:37 AM
+-- Generation Time: Aug 24, 2021 at 05:59 PM
 -- Server version: 5.7.24
 -- PHP Version: 7.4.1
 
@@ -74,6 +74,44 @@ INSERT INTO `commentaires` (`id`, `id_membre`, `id_acteur`, `date_commentaire`, 
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `dislikes`
+--
+
+CREATE TABLE `dislikes` (
+  `id_dislike` int(11) NOT NULL,
+  `id_acteur` int(11) NOT NULL,
+  `id_membre` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `dislikes`
+--
+
+INSERT INTO `dislikes` (`id_dislike`, `id_acteur`, `id_membre`) VALUES
+(2, 2, 24);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `likes`
+--
+
+CREATE TABLE `likes` (
+  `id_like` int(11) NOT NULL,
+  `id_acteur` int(11) NOT NULL,
+  `id_membre` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `likes`
+--
+
+INSERT INTO `likes` (`id_like`, `id_acteur`, `id_membre`) VALUES
+(5, 1, 24);
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `membres`
 --
 
@@ -94,7 +132,8 @@ CREATE TABLE `membres` (
 INSERT INTO `membres` (`id`, `nom`, `prenom`, `username`, `password`, `question`, `reponse`) VALUES
 (21, 'Perrin', 'Kevin', 'Shazy', '$2y$10$QP87iBv9/xdcTxIbMUfwY.jC4s4j/gNTZhuJhxYTThrY1ytyoi59e', 'coucou ?', 'coucou'),
 (22, 'Perrin', 'Cora', 'Kira', '$2y$10$ILFTWww6imIzUY8WseCLv.hbDWEttQD95oTwqOA6H5GPbqHfkr/UK', 'yo', 'yo'),
-(23, 'sdfqs', 'sdfqsdf', 'aaa', '$2y$10$A8MDRjFi6WZQyFNbRd/Ua.4ZlUO4PEB2paZrvJ4N9AflALnNFg9Q.', 'aaa', 'aaa');
+(23, 'sdfqs', 'sdfqsdf', 'aaa', '$2y$10$A8MDRjFi6WZQyFNbRd/Ua.4ZlUO4PEB2paZrvJ4N9AflALnNFg9Q.', 'aaa', 'aaa'),
+(24, 'derniertest', 'derniertest', 'Shazytest', '$2y$10$jliLJoA1eyIH837oTmgX1uiRLi2Xhsai2s8DRx28KEuZ8AvGHUj.S', 'yo', 'yo');
 
 --
 -- Indexes for dumped tables
@@ -113,6 +152,22 @@ ALTER TABLE `commentaires`
   ADD PRIMARY KEY (`id`),
   ADD KEY `fk_commentaires_acteurs` (`id_acteur`),
   ADD KEY `fk_commentaires_membres` (`id_membre`);
+
+--
+-- Indexes for table `dislikes`
+--
+ALTER TABLE `dislikes`
+  ADD PRIMARY KEY (`id_dislike`),
+  ADD KEY `fk_dislikes_acteurs` (`id_acteur`),
+  ADD KEY `fk_dislikes_membre` (`id_membre`);
+
+--
+-- Indexes for table `likes`
+--
+ALTER TABLE `likes`
+  ADD PRIMARY KEY (`id_like`),
+  ADD KEY `fk_likes_acteurs` (`id_acteur`),
+  ADD KEY `fk_likes_membre` (`id_membre`);
 
 --
 -- Indexes for table `membres`
@@ -137,10 +192,40 @@ ALTER TABLE `commentaires`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
+-- AUTO_INCREMENT for table `dislikes`
+--
+ALTER TABLE `dislikes`
+  MODIFY `id_dislike` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT for table `likes`
+--
+ALTER TABLE `likes`
+  MODIFY `id_like` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
 -- AUTO_INCREMENT for table `membres`
 --
 ALTER TABLE `membres`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+
+--
+-- Constraints for dumped tables
+--
+
+--
+-- Constraints for table `dislikes`
+--
+ALTER TABLE `dislikes`
+  ADD CONSTRAINT `fk_dislikes_acteurs` FOREIGN KEY (`id_acteur`) REFERENCES `acteurs` (`id`),
+  ADD CONSTRAINT `fk_dislikes_membre` FOREIGN KEY (`id_membre`) REFERENCES `membres` (`id`);
+
+--
+-- Constraints for table `likes`
+--
+ALTER TABLE `likes`
+  ADD CONSTRAINT `fk_likes_acteurs` FOREIGN KEY (`id_acteur`) REFERENCES `acteurs` (`id`),
+  ADD CONSTRAINT `fk_likes_membre` FOREIGN KEY (`id_membre`) REFERENCES `membres` (`id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

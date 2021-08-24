@@ -115,7 +115,25 @@ header p {
     text-align:left;
 }
 /*========= Commentaires ===========*/
-
+.section_commentaires {
+    background-color: white;
+    margin-top: 20px;
+    padding-top: 2px;
+    padding-bottom: 2px;
+}
+.commentaires {
+    border: solid 5px red;
+    border-radius: 10px;
+}
+.head_comment {
+    text-align:left;
+    margin-left: 20px;
+}
+.comment {
+    text-align:left;
+    margin-left: 40px;
+    font-family: Verdana, serif;
+}
 footer {
     display: flex;
     grid-area: footer;

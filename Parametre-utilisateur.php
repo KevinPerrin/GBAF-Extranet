@@ -63,6 +63,7 @@ if (isset($_SESSION['id']))
         header('Location: Parametre-utilisateur.php?id='.$SESSION['id']);
     }
 ?>
+<!DOCTYPE html>
 <html>
     <head>
         <meta charset="utf-8" />

@@ -9,13 +9,14 @@ catch(Exception $e)
 {
         die("Erreur : ".$e->getMessage());
 }
-if (!isset($_SESSION['nom']) && !isset($_SESSION['prenom']) && !isset($_SESSION['id_user'])) 
+if (!isset($_SESSION['nom']) && !isset($_SESSION['prenom']) && !isset($_SESSION['id'])) 
 {
 
     header('Location: GBAF Connexion.php');
     exit();
 }
 ?>
+<!DOCTYPE html>
 <html>
     <head>
         <meta charset="utf-8" />

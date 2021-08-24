@@ -1,4 +1,5 @@
 <?php
+session_start();
 
 try
 {
@@ -49,6 +50,7 @@ if (isset($_POST['forminscription']))
 }
 
 ?>
+<!DOCTYPE html>
 <html>
     <head>
         <meta charset="utf-8" />

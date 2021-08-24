@@ -10,7 +10,7 @@ catch(Exception $e)
 {
         die("Erreur : ".$e->getMessage());
 }
-if (!isset($_SESSION['nom']) && !isset($_SESSION['prenom']) && !isset($_SESSION['id_user'])) 
+if (!isset($_SESSION['nom']) && !isset($_SESSION['prenom']) && !isset($_SESSION['id'])) 
 {
 
     header('Location: GBAF Connexion.php');
@@ -48,9 +48,21 @@ if (!isset($_SESSION['nom']) && !isset($_SESSION['prenom']) && !isset($_SESSION[
                 $erreur = 'Un seul commentaire par personne !';
             }
         }
-   
+        if($req_acteur->rowCount() == 1)
+        {
+            // Ajoute 1 ou retire 1 au nbr de likes affichés
+            $likes = $bdd->prepare('SELECT id_like FROM likes WHERE id_acteur = ?');
+            $likes->execute(array($id_acteur));
+            $likes = $likes->rowCount();
+
+            // Ajoute 1 ou retire 1 au nbr de likes affichés
+            $dislikes = $bdd->prepare('SELECT id_dislike FROM dislikes WHERE id_acteur = ?');
+            $dislikes->execute(array($id_acteur));
+            $dislikes = $dislikes->rowCount();
+        }
 
 ?>
+<!DOCTYPE html>
 <html>
     <head>
         <meta charset="utf-8" />
@@ -77,20 +89,26 @@ if (!isset($_SESSION['nom']) && !isset($_SESSION['prenom']) && !isset($_SESSION[
         <div class="container_acteur">
             <?php echo $resultat['contenu'] ?>
         </div>
-        <form method="POST">
-            <h2>Commentaires</h2>
-            <div class="commentaire">
-                <textarea name="commentaire" placeholder="Votre commentaire..."></textarea><br />
-                <input type="submit" value="Poster" name="submit_comm" />
-            </div>
-        </form>
+    </div>
         <?php
             if (isset($erreur)) 
             {
                 echo $erreur;
             }
             ?>
-    </div>
+    <form method="POST">
+        <h2>Commentaires</h2>
+        <div class="newcommentaire">
+            <textarea name="commentaire" placeholder="Votre commentaire..."></textarea><br />
+            <input type="submit" value="Poster" name="submit_comm" />
+        </div>
+    </form>
+    <a href="action.php?t=1&id=<?= $id_acteur ?>">
+        <img src="img/thumbsup.jpg" alt="like"> (<?= $likes ?>)
+    </a>
+    <a href="action.php?t=2&id=<?= $id_acteur ?>">
+        <img src="img/thumbsdown.jpg" alt="dislike"> (<?= $dislikes ?>)
+    </a>
         <?php
             $req = $bdd->prepare('SELECT commentaires.id, commentaires.id_membre, membres.prenom, commentaires.commentaire, DATE_FORMAT(date_commentaire, \'%d/%m/%Y \') AS date_comment FROM commentaires INNER JOIN membres ON commentaires.id_membre = membres.id WHERE id_acteur = ? ORDER BY date_commentaire DESC');
             $req->execute(array($_GET['id']));
@@ -98,26 +116,26 @@ if (!isset($_SESSION['nom']) && !isset($_SESSION['prenom']) && !isset($_SESSION[
             while ($donnees = $req->fetch())
             {
                
-            ?>
+        ?>
             
-    <section class="section_commentaire">
+    <section class="section_commentaires">
         <div>
-                            <div class="commentaires">
-                    <div class="head_comment">
-                        <div>
-                            <p class="prenom"><?php echo $donnees['prenom']; ?></p>
-                            <p class="date_commentaire">le <?php echo $donnees['date_comment']; ?></p>
-                        </div>
+            <div class="commentaires">
+                <div class="head_comment">
+                    <div>
+                        <p><?php echo $donnees['prenom'];?> le <?php echo $donnees['date_comment']; ?></p>
                     </div>
-                    <p class="comment"><?php echo $donnees['commentaire']; ?></p>
                 </div>
+                <p class="comment"><?php echo $donnees['commentaire']; ?></p>
+            </div>
         </div>
     </section>
 
-                <?php
-                }
-                $req->closeCursor();
-                ?>
+    <?php
+    }
+        $req->closeCursor();
+    ?>
+
     <footer>
         <p>| Mentions légales | Contact |</p>
     </footer>
